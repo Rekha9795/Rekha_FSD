@@ -1,0 +1,373 @@
+Assignment1 Answers:
+1.Write a program that will capture your name and year of graduation into variables, and displays their values on the screen.
+  Make sure that you capture the input from keyboard and use two variables. The variable that holds your name is the best datatype for such a variable, 
+  and that the variable that holds the year is the best datatype for that variable.
+  Also make sure that your variable names are good: the name of a variable should always relate to its contents.
+
+package com.cts;
+
+import java.util.Scanner;
+
+public class NameAndGraduation {
+	
+	
+	
+	public static void main(String args[]) {
+		String name;
+		int graduationYear;
+		Scanner scan=new Scanner(System.in);
+		
+		System.out.println("Enter student name");
+		name=scan.next();
+		
+		System.out.println("Enter your year of graduation");
+		graduationYear=Integer.parseInt(scan.next());
+		
+		System.out.println("My name is "+name+" and I will graduate in "+graduationYear+".");
+
+	}
+
+}
+2.Modify the above assignment to add some input validations. 
+     1.	Input your name: It must not allow numbers. Special characters are allowed.
+     2.	Input your year of graduation: It must allow integers only. Floating point numbers and alphabets are not allowed.
+     3.	If user makes invalid input, then program must not exit. It must prompt for the same input again; until user makes valid input.
+
+package com.cts;
+
+import java.util.Scanner;
+
+public class NameAndGraduationValidation {
+	
+	public static void main(String args[]) {
+		String name;
+		int graduationYear=0;
+		Scanner scan=new Scanner(System.in);
+		
+		System.out.println("Enter student name");
+		while(!scan.hasNext("[A-Za-z.!@#$%^&*]+"))
+		{
+			System.out.println("Please enter a valid name");
+			scan.next();
+		}
+		
+		name=scan.next();
+		
+
+		int c = 0;
+		do {
+			
+			
+		System.out.println("Enter your year of graduation:");
+		
+		try 
+        { 
+           
+			graduationYear =Integer.parseInt(scan.next());
+            c=0;
+        }  
+        catch (NumberFormatException e)  
+        { 
+            
+        	System.out.println("Please enter a valid year"); 
+            c++;
+            
+        } 
+		}while(c!=0);
+		System.out.println("My name is "+name+" and I will graduate in "+graduationYear+".");
+
+	}
+}
+
+
+
+3.Write a code to implement quiz. 
+import java.util.*;
+class Quiz{
+  public static void main(String ar[]){
+  Scanner s = new Scanner(System.in);
+  char status;
+  int option,correct1=1,correct2=2;
+  System.out.println("Are you ready for a quiz? Y/N");
+  status=s.nextLine().charAt(0);
+     if(status=='y'||status=='Y'){
+     System.out.println("Okay, Here it comes!");
+     System.out.println("Q1) What is the capital of India? \n 1) Delhi\n 2)Mumbai\n 3)Chennai");
+     option=s.nextInt();
+         if(option==correct1){
+            System.out.println("That's Right!");
+            }
+         else{
+         System.out.println("Sorry!, Capital of India is : Delhi");
+         }
+      System.out.println("Q2) Can you store the value dog in a variable of type int? \n 1) yes\n 2)no");
+      option=s.nextInt();
+    if(option==correct2){
+    System.out.println("That's Right!");
+    }
+    else{
+    System.out.println("Sorry!, dog is a string, ints can only store numbers");
+    }
+    }
+   else
+  {
+  System.out.println("Hoping for next time");
+  }
+ }
+}
+
+
+Assignment2 Answers:
+
+1.Code should capture all the integers and create an array. Output should be sorted array. 
+
+2.Re-implement above (assignment 1) for floating point numbers.
+package com.cts;
+
+import java.util.Scanner;
+
+public class ArrayFloat {
+
+public static void main(String[] args) {
+		
+		int limit;
+		float[] array=new float[20];
+		
+		Scanner scanner=new Scanner(System.in);
+		
+		System.out.println("Enter the limit of numbers:");
+		//limit=Integer.parseInt(scanner.next());
+		limit=scanner.nextInt();
+		
+		System.out.println("Enter Elements:");
+		
+		for(int i=0;i<limit;i++) {
+			array[i]=scanner.nextFloat();
+		}
+		for(int i=0;i<limit;i++) {
+			for(int j=i+1;j<limit;j++) {
+				
+			if(array[i]>array[j] )
+			{
+				float t=array[i];
+				array[i]=array[j];
+				array[j]=t;
+			
+			}
+		}
+	}
+		
+		for(int i=0;i<limit;i++) {
+			System.out.println(array[i]);
+		}
+
+	}
+
+}
+
+
+
+
+3.Output maximum and minimum number from an array of integers.
+
+package com.cts;
+
+import java.util.Scanner;
+
+public class ArrayInteger {
+	public static void main(String[] args) {
+		int limit,flag=0,location=0;
+		int[] array=new int[20];
+		
+		Scanner scanner=new Scanner(System.in);
+		
+		System.out.println("Enter the limit of numbers:");
+		
+		limit=scanner.nextInt();
+		
+		System.out.println("Enter Elements:");
+		
+		for(int i=0;i<limit;i++) {
+			array[i]=scanner.nextInt();
+		}
+		for(int i=0;i<limit;i++) {
+			for(int j=i+1;j<limit;j++) {
+				
+			if(array[i]>array[j] )
+			{
+				int t=array[i];
+				array[i]=array[j];
+				array[j]=t;
+			
+			}
+		}
+	}
+		
+		for(int i=0;i<limit;i++) {
+			System.out.println(array[i]);
+		}
+		
+		System.out.println("The minimum value is "+array[0]);
+		System.out.println("The maximum value is "+array[limit-1]);
+		
+		System.out.println("Enter the array index to be deleted");
+		int arrayIndex=scanner.nextInt();
+		for(int i = 0;i<limit;i++)
+		{
+			if(i==arrayIndex)
+			{
+				flag=1;
+				location = i;
+				break;
+				
+				
+			}
+			else
+			{
+				flag=0;
+			}
+		}
+		if(flag==1) {
+		for(int i=location+1;i<limit;i++)
+		{
+			array[i-1]=array[i];
+			
+		}
+		System.out.println("After Deletion:");
+		for(int i=0;i<limit-1;i++)
+		{
+			System.out.println(array[i]);
+			
+		}
+		}
+		else {
+			System.out.println("Array index not found");
+		}
+}
+}
+
+4.Remove number from an array from specific index position. Program should ask (take input) user for specific index position via keyboard. 
+    If index position is out-of-bounds then, program should display error message in console.		
+
+
+		
+		
+5.Insert number in array at specific index position. Program should ask (take input) user for specific index position via keyboard. 
+    If index position is out-of-bounds then, program should display error message in console.		
+		
+		
+	
+
+
+
+
+
+
+
+
+Assignment3 Answers:
+
+
+1.Wite a code to input string from terminal window. Use  Substrings.
+package com.cts;
+
+import java.util.Scanner;
+
+public class SubString {
+	
+	public static void main(String args[]) {
+		
+		String string;
+		int i,j;
+		Scanner scan=new Scanner(System.in);
+		System.out.println("Enter the string");
+		string=scan.nextLine();
+		// System.out.println(string);
+		for(i=0;i<string.length();i++)
+		{
+			if(string.substring(i).startsWith(" ")||i==0){
+				
+				for(j=i+1;j<=string.length();j++)
+				{
+					if(string.substring(j).startsWith(" ")||j==string.length())
+					{
+						System.out.println(string.substring(i,j));
+						i=j;
+					}
+					
+				}
+			}
+		}
+		}
+
+}
+
+
+
+2.Wite a code to input string from terminal window. Use chartAt. Toggle each alphabet case in output.
+
+
+
+
+
+3.Write a code to check if the string, word or number input from terminal is palindrome.
+package com.cts;
+
+import java.util.Scanner;
+
+public class Pallindrome {
+	
+	public static void main(String args[]){
+		String string,reverse="";
+		Scanner scan=new Scanner(System.in);
+		System.out.println("Enter a string");
+		string=scan.next();
+		int length=string.length();
+		for(int i=length-1;i>=0;i--){
+			reverse=reverse+string.charAt(i);
+		}
+		if(string.equals(reverse))
+		{
+			System.out.println(string+" is a pallindrome. ");
+		}
+		else{
+			System.out.println(string+ " not a pallindrome");
+		}
+	}
+
+}
+
+
+
+
+4.Write a code to get difference between two dates in days. Input two dates from terminal.
+import java.util.Date;
+import java.text.SimpleDateFormat;
+class Example{
+   public static void main(String args[]){
+	 SimpleDateFormat myFormat = new SimpleDateFormat("dd MM yyyy");
+	 String dateBeforeString = "31 01 2014";
+	 String dateAfterString = "02 02 2014";
+
+	 try {
+	       Date dateBefore = myFormat.parse(dateBeforeString);
+	       Date dateAfter = myFormat.parse(dateAfterString);
+	       long difference = dateAfter.getTime() - dateBefore.getTime();
+	       float daysBetween = (difference / (1000*60*60*24));
+               /* You can also convert the milliseconds to days using this method
+                * float daysBetween = 
+                *         TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS)
+                */
+	       System.out.println("Number of Days between dates: "+daysBetween);
+	 } catch (Exception e) {
+	       e.printStackTrace();
+	 }
+   }
+}
+5.Write a code to input strings from terminal. One string at a time. All strings should be stored in array list. Output should be sorted strings.
+
+
+
+
+
+
